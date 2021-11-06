@@ -689,6 +689,8 @@ __weak void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   /* NOTE : This function should not be modified, when the callback is needed,
             the HAL_UART_MspInit can be implemented in the user file
    */
+
+  __HAL_UART_ENABLE_IT(&huart4, UART_IT_RXNE);
 }
 
 /**
