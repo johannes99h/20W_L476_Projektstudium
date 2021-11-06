@@ -67,7 +67,7 @@ static void MX_USART1_UART_Init(void);
 volatile	uint8_t 	buffRx[1];
 			uint8_t 	buffMain[buffSize];
 
-void HAL_UART_RxCptlCallback(UART_HandleTypeDef *huart)
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	  if (huart->Instance == UART4)
 	  {
@@ -79,6 +79,7 @@ void HAL_UART_RxCptlCallback(UART_HandleTypeDef *huart)
 		  }
 		  else
 		  {
+			  // Buffer zurücksetzen
 			  RxCompleted = 0;
 			  buffMain[RxCompleted] = buffRx[0];
 			  RxCompleted++;
