@@ -22,6 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "receiver.h"
 
 /* USER CODE END Includes */
 
@@ -59,35 +60,9 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-#include "string.h"
-
-#define buffSize 64
-
-			uint8_t		RxCompleted = 0;
-volatile	uint8_t 	buffRx[1];
-			uint8_t 	buffMain[buffSize];
-
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	  if (huart->Instance == UART4)
-	  {
-		  // "low budget" Ring-Buffer
-		  if(RxCompleted < buffSize)
-		  {
-			  buffMain[RxCompleted] = buffRx[0];
-			  RxCompleted++;
-		  }
-		  else
-		  {
-			  // Buffer zurücksetzen
-			  RxCompleted = 0;
-			  buffMain[RxCompleted] = buffRx[0];
-			  RxCompleted++;
-		  }
-
-		  // Interrupt freigeben
-		  HAL_UART_Receive_IT(&huart4, (uint8_t *)buffRx, sizeof(buffRx));
-	  }
+	  RxStuff();
 }
 
 /* USER CODE END 0 */
@@ -207,7 +182,7 @@ static void MX_UART4_Init(void)
   huart4.Init.WordLength = UART_WORDLENGTH_8B;
   huart4.Init.StopBits = UART_STOPBITS_1;
   huart4.Init.Parity = UART_PARITY_EVEN;
-  huart4.Init.Mode = UART_MODE_RX;
+  huart4.Init.Mode = UART_MODE_TX_RX;
   huart4.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart4.Init.OverSampling = UART_OVERSAMPLING_16;
   huart4.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;

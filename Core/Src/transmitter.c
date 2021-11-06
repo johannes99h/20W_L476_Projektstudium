@@ -1,12 +1,8 @@
 #include <receiver.h>
 
-/*
-uint8_t buffMain[buffSize] = { 0 };
-uint8_t buffTx[buffSize] = { 0 };
-
-
-void transmitData()
+void transmitData(uint8_t *buffMain)
 {
-	HAL_UART_Transmit(&huart2, (uint8_t *)buffTx, buffSize);
+	HAL_UART_Transmit(&huart4, (uint8_t *)buffMain, buffSize, 10);
+	// mit Interrupt umsetzen & im Callback "Receive" starten?
+	// Byte für Byte pipelinen?
 }
-*/

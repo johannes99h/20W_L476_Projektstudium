@@ -3,14 +3,16 @@
 #include "stm32l4xx_hal.h"
 #include "string.h"
 
-#define buffSize 100
+#define 	buffSize 	100
+#define 	frameSize 	100
 
-/*
-uint8_t buffByte;
-uint8_t indexNumber;
-uint8_t buffRx[buffSize];
-uint8_t buffMain[buffSize];
+extern 		UART_HandleTypeDef huart4;
 
-extern UART_HandleTypeDef huart4;
-// extern DMA_HandleTypeDef hdma_usart4_rx;
-*/
+			uint8_t		RxCompleted;
+volatile	uint8_t 	buffRx[1];
+			uint8_t 	buffMain[buffSize];
+			uint8_t 	buffTx[frameSize];
+
+void 		RxStuff();
+uint8_t*	checkForHeader(uint8_t *buffMain);
+uint8_t* 	checkTheChecksum(uint8_t *buffTx);
