@@ -59,43 +59,35 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t RxData[2];
-uint8_t TxData[2] = "Hi";
-uint8_t mainBuff[20];
-uint8_t TxIndex = 0;
-uint8_t RxIndex = 0;
+#include "string.h"
 
+#define buffSize 64
 
-/*
+			uint8_t		RxCompleted = 0;
+volatile	uint8_t 	buffRx[1];
+			uint8_t 	buffMain[buffSize];
+
 void HAL_UART_RxCptlCallback(UART_HandleTypeDef *huart)
 {
-	HAL_UART_Receive_IT(&huart4, (uint8_t *)RxData, 1);
+	  if (huart->Instance == UART4)
+	  {
+		  // "low budget" Ring-Buffer
+		  if(RxCompleted < buffSize)
+		  {
+			  buffMain[RxCompleted] = buffRx[0];
+			  RxCompleted++;
+		  }
+		  else
+		  {
+			  RxCompleted = 0;
+			  buffMain[RxCompleted] = buffRx[0];
+			  RxCompleted++;
+		  }
 
-	if(huart->Instance == UART4)
-	{
-		mainBuff[RxIndex] = RxData[0];
-		RxIndex++;
-		HAL_UART_Receive_IT(&huart4, (uint8_t *)RxData, 1);
-	}
+		  // Interrupt freigeben
+		  HAL_UART_Receive_IT(&huart4, (uint8_t *)buffRx, sizeof(buffRx));
+	  }
 }
-*/
-
-void handling()
-{
-	HAL_UART_Receive(&huart4, (uint8_t *)RxData, sizeof(RxData), 10);
-}
-
-void UART4_IRQHandler(void)  {
-    /* USER CODE BEGIN USART3_IRQn 0 */
-    handling();
-    return;  // To avoid calling the handler at all
-             // (in case you want to save the time)
-    /* USER CODE END USART3_IRQn 0 */
-    HAL_UART_IRQHandler(&huart4);
-    /* USER CODE BEGIN USART3_IRQn 1 */
-    /* USER CODE END USART3_IRQn 1 */
-}
-
 
 /* USER CODE END 0 */
 
@@ -130,8 +122,7 @@ int main(void)
   MX_UART4_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  // HAL_UART_Receive_IT(&huart4, (uint8_t *)RxData, 1);
-  // HAL_UART_Receive(&huart4, (uint8_t *)RxData, 1, 10);
+  HAL_UART_Receive_IT(&huart4, (uint8_t *)buffRx, sizeof(buffRx));
 
   /* USER CODE END 2 */
 
@@ -139,13 +130,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	 // HAL_UART_Receive_IT(&huart4, (uint8_t *)RxData, 1);
-	 /*
-	 if( HAL_UART_Transmit(&huart1, (uint8_t *)TxData, sizeof(TxData), 10) == HAL_OK)
-	 {
-		 TxIndex++;
-	 }
-	 */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

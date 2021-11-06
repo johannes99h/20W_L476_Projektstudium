@@ -28,8 +28,6 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal_def.h"
 
-extern UART_HandleTypeDef huart4;
-
 /** @addtogroup STM32L4xx_HAL_Driver
   * @{
   */
