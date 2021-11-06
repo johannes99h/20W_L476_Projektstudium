@@ -7,7 +7,9 @@ volatile	uint8_t 	buffRx[1] = { 0 };
 
 void RxStuff()
 {
-	// "low budget" Ring-Buffer
+	transmitData(buffRx);
+
+	/* "low budget" Ring-Buffer
 	if(RxCompleted < buffSize)
 	{
 		buffMain[RxCompleted] = buffRx[0];
@@ -29,11 +31,13 @@ void RxStuff()
 		buffMain[RxCompleted] = buffRx[0];
 		RxCompleted++;
 	}
+	*/
 
 	// Interrupt freigeben
 	HAL_UART_Receive_IT(&huart4, (uint8_t *)buffRx, sizeof(buffRx));
 }
 
+/*
 uint8_t* checkForHeader(uint8_t *buffMain)
 {
 	// kein Plan wie ich das am besten anstelle... vielleicht auch nicht Brute-Force verwenden?
@@ -58,8 +62,11 @@ uint8_t* checkForHeader(uint8_t *buffMain)
 
 	return buffTx;
 }
+*/
 
+/*
 uint8_t* checkTheChecksum(uint8_t *buffTx)
 {
 	return buffTx;
 }
+*/

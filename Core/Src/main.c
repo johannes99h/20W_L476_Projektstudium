@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "receiver.h"
+#include "transmitter.h"
 
 /* USER CODE END Includes */
 
