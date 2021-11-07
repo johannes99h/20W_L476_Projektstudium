@@ -1,9 +1,9 @@
 #include <receiver.h>
 
-			uint8_t		RxCompleted = 0;
-volatile	uint8_t 	buffRx[1] = { 0 };
-			uint8_t 	buffMain[buffSize] = { 0 };
-			uint8_t 	buffTx[frameSize] = { 0 };
+//			uint8_t		RxCompleted = 0;
+volatile	uint8_t 	buffRx[buffSize] = { 0 };
+//			uint8_t 	buffMain[buffSize] = { 0 };
+//			uint8_t 	buffTx[buffSize] = { 0 };
 
 void RxStuff()
 {
@@ -32,9 +32,6 @@ void RxStuff()
 		RxCompleted++;
 	}
 	*/
-
-	// Interrupt freigeben
-	HAL_UART_Receive_IT(&huart4, (uint8_t *)buffRx, sizeof(buffRx));
 }
 
 /*
