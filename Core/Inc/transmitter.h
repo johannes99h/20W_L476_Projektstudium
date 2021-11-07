@@ -5,4 +5,4 @@
 
 extern UART_HandleTypeDef huart4;
 
-void transmitData(uint8_t *buffRx);
+void transmitData(uint8_t *buff);

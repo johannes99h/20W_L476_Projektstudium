@@ -1,6 +1,12 @@
 #include <receiver.h>
 
-void transmitData(uint8_t *buffRx)
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
-	HAL_UART_Transmit_IT(&huart4, (uint8_t *)buffRx, sizeof(buffRx));
+	// Interrupt freigeben
+	HAL_UART_Receive_IT(&huart4, (uint8_t *)buff, sizeof(buff));
+}
+
+void transmitData(uint8_t *buff)
+{
+	HAL_UART_Transmit_IT(&huart4, (uint8_t *)buff, sizeof(buff));
 }
