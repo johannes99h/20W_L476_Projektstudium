@@ -8,5 +8,5 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 
 void transmitData(uint8_t *buff)
 {
-	HAL_UART_Transmit_IT(&huart4, (uint8_t *)buff, sizeof(buff));
+	HAL_UART_Transmit_IT(&huart2, (uint8_t *)buff, sizeof(buff));
 }
