@@ -1,1 +1,2 @@
-transmitter.c:3:6:transmitData	16	static
+transmitter.c:3:6:HAL_UART_TxCpltCallback	16	static
+transmitter.c:9:6:transmitData	16	static

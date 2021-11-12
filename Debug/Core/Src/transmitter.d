@@ -26,7 +26,8 @@ Core/Src/transmitter.o: ../Core/Src/transmitter.c ../Core/Inc/receiver.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
- ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
+ ../Core/Inc/transmitter.h
 
 ../Core/Inc/receiver.h:
 
@@ -85,3 +86,5 @@ Core/Src/transmitter.o: ../Core/Src/transmitter.c ../Core/Inc/receiver.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
+
+../Core/Inc/transmitter.h:

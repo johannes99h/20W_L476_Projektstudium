@@ -1,8 +1,12 @@
 #include <receiver.h>
 
-void transmitData(uint8_t *buffMain)
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 {
-	HAL_UART_Transmit(&huart4, (uint8_t *)buffMain, buffSize, 10);
-	// mit Interrupt umsetzen & im Callback "Receive" starten?
-	// Byte für Byte pipelinen?
+	// Interrupt freigeben
+	HAL_UART_Receive_IT(&huart4, (uint8_t *)buff, sizeof(buff));
+}
+
+void transmitData(uint8_t *buff)
+{
+	HAL_UART_Transmit_IT(&huart4, (uint8_t *)buff, sizeof(buff));
 }

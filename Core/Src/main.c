@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "receiver.h"
+#include "transmitter.h"
 
 /* USER CODE END Includes */
 
@@ -60,10 +61,6 @@ static void MX_USART1_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	  RxStuff();
-}
 
 /* USER CODE END 0 */
 
@@ -98,7 +95,7 @@ int main(void)
   MX_UART4_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart4, (uint8_t *)buffRx, sizeof(buffRx));
+  HAL_UART_Receive_IT(&huart4, (uint8_t *)buff, sizeof(buff));
 
   /* USER CODE END 2 */
 
@@ -106,7 +103,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+	// Bugfix: uC ist nach etwa einer Minute von den Interrupt-Callbacks (grundlos?) in die while-Schleife gesprungen
+	HAL_UART_Receive_IT(&huart4, (uint8_t *)buff, sizeof(buff));
+	/* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
