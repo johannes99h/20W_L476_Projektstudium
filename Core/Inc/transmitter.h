@@ -3,6 +3,6 @@
 #include "stm32l4xx_hal.h"
 #include "string.h"
 
-extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart4;
 
-void transmitData(uint8_t *buff);
+void transmitData(uint8_t *buffTx);

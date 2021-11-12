@@ -8,4 +8,6 @@
 
 extern 		UART_HandleTypeDef huart4;
 
-volatile	uint8_t 	buff[buffSize];
+// volatile	uint8_t 	buff[buffSize];
+volatile	uint8_t 	buffRx[buffSize];
+			uint8_t 	buffTx[buffSize];
